@@ -7,6 +7,8 @@ import Animated, {
 } from "react-native-reanimated";
 
 import { Data } from "../../types";
+import { useNavigation } from "@react-navigation/native";
+import { SharedElement } from "react-navigation-shared-element";
 
 interface CarouselItemProps {
   item: Data;
@@ -14,11 +16,17 @@ interface CarouselItemProps {
   animationValue: SharedValue<number>;
 }
 
+interface Navigation {
+  navigate: (screen: string, params: Data) => void;
+}
+
 export const CarouselItem = ({
   item,
   isActive,
   animationValue,
 }: CarouselItemProps) => {
+  const { navigate } = useNavigation<Navigation>();
+
   const animatedStyle = useAnimatedStyle(() => {
     const opacity = interpolate(
       animationValue.value,
@@ -31,9 +39,15 @@ export const CarouselItem = ({
 
   return (
     <Animated.View style={[styles.item, animatedStyle]}>
-      <TouchableOpacity activeOpacity={0.8} disabled={!isActive}>
-        <Image source={{ uri: item.image }} style={styles.image} />
-      </TouchableOpacity>
+      <SharedElement id={String(item.id)}>
+        <TouchableOpacity
+          activeOpacity={0.8}
+          disabled={!isActive}
+          onPress={() => navigate("Detail", item)}
+        >
+          <Image source={{ uri: item.image }} style={styles.image} />
+        </TouchableOpacity>
+      </SharedElement>
     </Animated.View>
   );
 };
@@ -42,9 +56,10 @@ export const styles = StyleSheet.create({
   item: {
     width: "100%",
     height: "auto",
-    aspectRatio: 16 / 9,
+    aspectRatio: 3 / 2,
     borderRadius: 8,
     overflow: "hidden",
+    backgroundColor: "#f0f0f0",
   },
   image: {
     width: "100%",
