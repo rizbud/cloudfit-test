@@ -20,6 +20,8 @@ https://github.com/user-attachments/assets/8f618c61-ec04-4080-9749-6dcc3cb999b4
 
 ## How to run the project
 
+> **Note:** Due to the use of native code in this project, it cannot be run on the Expo Go. You have to build the app for Android or iOS.
+
 1. Clone the repository and navigate to the project directory
 
    ```bash
