@@ -5,9 +5,11 @@ This is a technical test for CloudFit. The project is a simple React Native app 
 ## Demo
 
 ### Android
+
 https://github.com/user-attachments/assets/93a9db83-3715-4430-bee7-c823fafc1ef9
 
 ### iOS
+
 https://github.com/user-attachments/assets/8f618c61-ec04-4080-9749-6dcc3cb999b4
 
 ## Prerequisites
@@ -63,3 +65,17 @@ https://github.com/user-attachments/assets/8f618c61-ec04-4080-9749-6dcc3cb999b4
    ```bash
    npm run ios
    ```
+
+## Dependencies Used
+
+- Expo SDK 51
+- React Navigation
+- React Native Reanimated
+- React Native Gesture Handler
+- React Native Reanimated Carousel
+- React Native Shared Element
+- React Navigation Shared Element
+
+## Why I chose these dependencies
+
+I chose to use `react-native-reanimated-carousel`, `react-native-shared-element`, and `react-navigation-shared-element` for the carousel and transitions because they offer smooth animations and meet the project's requirements effectively. These libraries allowed me to avoid writing complex animations from scratch, saving time and ensuring a polished user experience.
