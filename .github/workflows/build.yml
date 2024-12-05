@@ -1,0 +1,30 @@
+name: Build App
+on:
+  workflow_dispatch:
+jobs:
+  build-android:
+    name: Build Android
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - uses: actions/setup-node@master
+        with:
+          node-version: "20.18.0"
+      - name: Setup OpenJDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: "17"
+          distribution: "adopt"
+          cache: "gradle"
+      - name: Install Dependencies
+        run: npm install
+      - name: Build Android
+        run: |
+          chmod +x ./android/gradlew
+          cd android
+          ./gradlew init
+          ./gradlew assembleRelease
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          path: ./android/app/build/outputs/apk/release/app-release.apk
