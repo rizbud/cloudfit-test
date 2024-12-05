@@ -1,3 +1,5 @@
+import { Easing } from "react-native";
+
 import { StatusBar } from "expo-status-bar";
 import { NavigationContainer } from "@react-navigation/native";
 import {
@@ -32,6 +34,40 @@ export default function App() {
                   resize: "stretch",
                 },
               ]}
+              options={() => ({
+                headerMode: "screen",
+                headerShown: true,
+                transitionSpec: {
+                  open: {
+                    animation: "timing",
+                    config: {
+                      duration: 300,
+                      easing: Easing.bezier(0.35, 0.45, 0, 1),
+                      useNativeDriver: true,
+                    },
+                  },
+                  close: {
+                    animation: "timing",
+                    config: {
+                      duration: 300,
+                      easing: Easing.bezier(0.35, 0.45, 0, 1),
+                      useNativeDriver: true,
+                    },
+                  },
+                },
+                cardStyleInterpolator: ({ current: { progress } }) => {
+                  const opacity = progress.interpolate({
+                    inputRange: [0, 1],
+                    outputRange: [0, 1],
+                    extrapolate: "clamp",
+                  });
+                  return { cardStyle: { opacity } };
+                },
+                gestureEnabled: false,
+                cardStyle: {
+                  backgroundColor: "transparent",
+                },
+              })}
             />
           </Stack.Navigator>
         </NavigationContainer>
